@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./login.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -24,7 +24,6 @@ export default function Login() {
           {/* LOGO */}
           <img src="/logo.png" alt="Logo" className="logo-small" />
 
-          
           <p className="subtitle">Acesse sua conta</p>
 
           <form onSubmit={handleLogin}>
@@ -51,7 +50,11 @@ export default function Login() {
             </button>
           </form>
 
-          <a href="#" className="link-esqueci">Esqueci minha senha</a>
+          {/* Apenas isso foi alterado */}
+          <Link to="/recuperar-senha" className="link-esqueci">
+            Esqueci minha senha
+          </Link>
+
         </div>
 
         {/* LADO DIREITO */}
