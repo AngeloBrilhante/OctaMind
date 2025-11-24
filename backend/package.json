@@ -1,0 +1,11 @@
+{
+  "name": "meu-site",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.0",
+    "mysql2": "^3.9.2",
+    "cors": "^2.8.5"
+  }
+}

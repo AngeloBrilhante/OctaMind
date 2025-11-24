@@ -1,0 +1,14 @@
+/* Remove qualquer margem padrão da página */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Faz o fundo ocupar 100% da tela */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background: none;
+  overflow: hidden;
+}

@@ -1,0 +1,130 @@
+/* LAYOUT GERAL */
+.materias-layout {
+  display: flex;
+  height: 100vh;
+  background: #751ac4;
+background: linear-gradient(112deg, rgba(117, 26, 196, 1) 23%, rgba(87, 199, 133, 1) 67%, rgba(29, 176, 21, 1) 100%);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* MENU LATERAL */
+.sidebar {
+  width: 230px;
+  background: rgba(0, 0, 0, 0.13);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  color: white;
+}
+
+.sidebar-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.sidebar-menu li:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-menu .active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ÁREA PRINCIPAL */
+.main-content {
+  flex: 1;
+  padding: 30px 40px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* BARRA SUPERIOR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.search-input {
+  width: 70%;
+  padding: 13px 20px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+}
+
+.search-input::placeholder {
+  color: #eee;
+}
+
+/* CARDS DE MATÉRIAS */
+/* CARDS DE MATÉRIAS */
+.materias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* cards maiores */
+  gap: 25px;
+}
+
+/* CARD MAIOR E COM IMAGEM OCUPANDO TUDO */
+.materia-card {
+  width: 100%;
+  height: 220px;              /* aumenta o card */
+  border-radius: 18px;
+  overflow: hidden;           /* impede a imagem de passar */
+  position: relative;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  transition: transform 0.25s ease;
+}
+
+/* animação */
+.materia-card:hover {
+  transform: translateY(-5px);
+}
+
+/* imagem cobrindo todo o card */
+.materia-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* IMAGEM PREENCHENDO O CARD */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* nome da matéria sobreposto */
+.materia-card p {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  z-index: 2;              /* fica acima da imagem */
+}

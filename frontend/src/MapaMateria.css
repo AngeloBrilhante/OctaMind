@@ -1,0 +1,30 @@
+.mapa-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mapa-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.fase-btn {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 5px solid #ffae00;
+  background: #fbff28;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
+}
+
+.fase-btn:hover {
+  transform: scale(1.15);
+}
