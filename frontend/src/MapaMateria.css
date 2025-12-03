@@ -3,6 +3,14 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
+
+  /* 🔥 fade suave */
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.mapa-container.fade-in {
+  opacity: 1;
 }
 
 .mapa-img {

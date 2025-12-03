@@ -1,11 +1,13 @@
 // MapaMateria.js
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./MapaMateria.css";
 
 export default function MapaMateria() {
   const { materia } = useParams();
   const navigate = useNavigate();
+
+  const [loaded, setLoaded] = useState(false);
 
   const mapas = {
     matematica: "/mapas/mapa_matematica.png",
@@ -26,8 +28,15 @@ export default function MapaMateria() {
     navigate(`/quiz/${materia}/${faseId}`);
   };
 
+  // 🔥 Pré-carrega a imagem do mapa
+  useEffect(() => {
+    const img = new Image();
+    img.src = mapas[materia];
+    img.onload = () => setLoaded(true);
+  }, [materia]);
+
   return (
-    <div className="mapa-container">
+    <div className={`mapa-container ${loaded ? "fade-in" : ""}`}>
       <img
         src={mapas[materia]}
         alt={`Mapa de ${materia}`}
