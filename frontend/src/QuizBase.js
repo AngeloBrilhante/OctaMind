@@ -1,60 +1,63 @@
-import React, { useState, useEffect } from "react";
-import "./Quiz.css";
+// QuizBase.js
+import React, { useState } from "react";
 
-export default function QuizBase({ materia, perguntas }) {
-  const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showScore, setShowScore] = useState(false);
+export default function QuizBase({ materia, nivel, perguntas }) {
+  const [index, setIndex] = useState(0);
+  const [acertos, setAcertos] = useState(0);
+  const [finalizado, setFinalizado] = useState(false);
 
-  useEffect(() => {
-    // Cria o audio de fundo
-    const bgMusic = new Audio("/bgm.mp3");
-    bgMusic.loop = true;       // toca em loop
-    bgMusic.volume = 1;      // ajusta volume
-    bgMusic.play().catch(() => {}); // ignora erros de autoplay
+  const perguntaAtual = perguntas[index];
 
-    // Para a música ao sair do quiz
-    return () => {
-      bgMusic.pause();
-      bgMusic.currentTime = 0;
-    };
-  }, []);
-
-  const handleAnswer = (opcao) => {
-    if (opcao === perguntas[current].resposta) {
-      setScore(score + 1);
+  const responder = (opcao) => {
+    if (opcao === perguntaAtual.resposta) {
+      setAcertos(acertos + 1);
     }
-    const next = current + 1;
-    if (next < perguntas.length) {
-      setCurrent(next);
+
+    if (index + 1 < perguntas.length) {
+      setIndex(index + 1);
     } else {
-      setShowScore(true);
+      setFinalizado(true);
     }
   };
 
-  return (
-    <div className="quiz-container">
-      <div className="quiz-card-wrapper">
-        <h1 className="quiz-title">Quiz de {materia}</h1>
+  if (finalizado) {
+    const porcentagem = (acertos / perguntas.length) * 100;
+    let medalha = "Bronze 🥉";
 
-        {showScore ? (
-          <div className="quiz-score">
-            <h2>Você acertou {score} de {perguntas.length}!</h2>
-          </div>
-        ) : (
-          <div className="quiz-card">
-            <h2>Pergunta {current + 1}:</h2>
-            <p>{perguntas[current].pergunta}</p>
-            <div className="quiz-options">
-              {perguntas[current].opcoes.map((op, i) => (
-                <button key={i} onClick={() => handleAnswer(op)}>
-                  {op}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
+    if (porcentagem >= 70) medalha = "Prata 🥈";
+    if (porcentagem >= 90) medalha = "Ouro 🥇";
+
+    return (
+      <div style={{ padding: 30 }}>
+        <h1>Quiz finalizado!</h1>
+        <h2>Matéria: {materia}</h2>
+        <h2>Nível: {nivel}</h2>
+        <h2>Acertos: {acertos}/{perguntas.length}</h2>
+        <h2>Medalha: {medalha}</h2>
       </div>
+    );
+  }
+
+  return (
+    <div style={{ padding: 30 }}>
+      <h1>{materia.toUpperCase()} - Nível {nivel}</h1>
+
+      <h2>{perguntaAtual.pergunta}</h2>
+
+      {perguntaAtual.opcoes.map((op) => (
+        <button
+          key={op}
+          onClick={() => responder(op)}
+          style={{
+            display: "block",
+            marginTop: 10,
+            padding: "10px 20px",
+            fontSize: 18
+          }}
+        >
+          {op}
+        </button>
+      ))}
     </div>
   );
 }
