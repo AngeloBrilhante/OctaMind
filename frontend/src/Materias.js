@@ -35,7 +35,7 @@ export default function Materias() {
         <ul className="sidebar-menu">
           <li className="active">📘 Matérias</li>
           <li>📊 Meu Desempenho</li>
-          <li>🏅 Minhas Medalhas</li>
+          <li onClick={() => navigate("/medalhas")}>🏅 Minhas Medalhas</li>
           <li>👤 Minha Conta</li>
           <li>⚙️ Configurações</li>
         </ul>

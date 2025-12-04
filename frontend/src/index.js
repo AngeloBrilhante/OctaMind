@@ -31,6 +31,8 @@ import QuizBio2 from "./quizzes/biologia/QuizBio2";
 import QuizBio3 from "./quizzes/biologia/QuizBio3";
 import QuizBio4 from "./quizzes/biologia/QuizBio4";
 
+import MedalhasPage from "./medals/MedalhasPage";
+
 import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -47,6 +49,8 @@ root.render(
 
       {/* Tela intermediária com os níveis da matéria (Mapa) */}
       <Route path="/materia/:materia" element={<MapaMateria />} />
+
+      <Route path="/medalhas" element={<MedalhasPage />} />
 
       {/* ======================== */}
       {/*   ROTAS DOS QUIZZES      */}

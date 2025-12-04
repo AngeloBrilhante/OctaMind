@@ -1,7 +1,8 @@
 // src/quizzes/QuizTemplate.js
 import React, { useState } from "react";
-import salvarMedalha from "../MedalhaService";
 import "./quiz.css";
+import { salvarMedalha } from "../medals/MedalhaService";
+
 
 
 export default function QuizTemplate({ perguntas, materia, nivel }) {
@@ -12,24 +13,29 @@ export default function QuizTemplate({ perguntas, materia, nivel }) {
   const atual = perguntas[indice];
 
   const responder = (alt) => {
-    if (alt === atual.correta) setAcertos(acertos + 1);
+  const novoAcerto = alt === atual.correta ? acertos + 1 : acertos;
 
-    if (indice + 1 < perguntas.length) {
-      setIndice(indice + 1);
-    } else {
-      setFinalizado(true);
+  if (indice + 1 < perguntas.length) {
+    setAcertos(novoAcerto);
+    setIndice(indice + 1);
+  } else {
+    // Finaliza o quiz
+    setAcertos(novoAcerto);
+    setFinalizado(true);
 
-      // Calcula medalha
-      const total = perguntas.length;
-      const percent = (acertos / total) * 100;
+    const total = perguntas.length;
+    const percent = (novoAcerto / total) * 100;
 
-      let medalha = "bronze";
-      if (percent >= 75) medalha = "ouro";
-      else if (percent >= 50) medalha = "prata";
+    let medalha = "bronze";
+    if (percent >= 75) medalha = "ouro";
+    else if (percent >= 50) medalha = "prata";
 
-      salvarMedalha(materia, nivel, medalha);
-    }
-  };
+    const nivelNumero = Number(nivel.replace("nivel", ""));
+    salvarMedalha(materia, nivelNumero, medalha);
+
+  }
+};
+
 
   if (finalizado) {
     return (
