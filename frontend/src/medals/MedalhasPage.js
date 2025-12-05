@@ -1,69 +1,63 @@
-// src/medals/MedalhasPage.js
+// MedalhasPage.js
+
 import React, { useEffect, useState } from "react";
-import "./medalhas.css";
+import "./MedalhasPage.css";
+
+// ⬇️ MOVER PARA FORA DO COMPONENTE
+const materias = [
+  { nome: "matematica", label: "Matemática" },
+  { nome: "portugues", label: "Português" },
+  { nome: "historia", label: "História" },
+  { nome: "quimica", label: "Química" },
+  { nome: "biologia", label: "Biologia" }
+];
 
 export default function MedalhasPage() {
-  const materias = ["matematica", "portugues", "historia", "quimica", "biologia"];
-
-  const materiasLabel = {
-    matematica: "Matemática",
-    portugues: "Português",
-    historia: "História",
-    quimica: "Química",
-    biologia: "Biologia",
-  };
-
-  const icones = {
-    ouro: "/medalIcons/ouro.png",
-    prata: "/medalIcons/prata.png",
-    bronze: "/medalIcons/bronze.png",
-  };
-
-  const [medalhas, setMedalhas] = useState([]);
+  const [medalhas, setMedalhas] = useState({});
 
   useEffect(() => {
-    const arr = [];
+    const dados = {};
 
-    materias.forEach((materia) => {
-      for (let nivel = 1; nivel <= 4; nivel++) {
-        const chave = `medal_${materia}_${nivel}`;
-        const medalhaSalva = localStorage.getItem(chave) || "nenhuma";
-
-        arr.push({
-          materia,
-          nivel,
-          medalha: medalhaSalva,
-        });
-      }
+    materias.forEach((m) => {
+      dados[m.nome] = {
+        1: localStorage.getItem(`medal_${m.nome}_1`),
+        2: localStorage.getItem(`medal_${m.nome}_2`),
+        3: localStorage.getItem(`medal_${m.nome}_3`),
+        4: localStorage.getItem(`medal_${m.nome}_4`)
+      };
     });
 
-    setMedalhas(arr);
-  }, [materias]); // <-- adicionado
+    setMedalhas(dados);
+  }, []); // ⬅️ agora não depende mais da array
 
   return (
     <div className="medalhas-container">
-      <h1 className="titulo">Minhas Medalhas</h1>
+      <h2>Quadro de Medalhas</h2>
 
-      <div className="medalhas-grid">
-        {medalhas.map((m, idx) => (
-          <div key={idx} className="medal-card">
-            <p className="materia">
-              {materiasLabel[m.materia]} — Nível {m.nivel}
-            </p>
+      <div className="materias-grid">
+        {materias.map((m) => (
+          <div key={m.nome} className="materia-card">
+            <h3>{m.label}</h3>
 
-            {m.medalha === "nenhuma" ? (
-              <div className="medal-placeholder">?</div>
-            ) : (
-              <img
-                src={icones[m.medalha] || "/medalIcons/bronze.png"}
-                alt={m.medalha}
-                className={`medal-img ${m.medalha}`}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = "/medalIcons/bronze.png";
-                }}
-              />
-            )}
+            <div className="medalhas-row">
+              {[1,2,3,4].map((nivel) => {
+                const medalha = medalhas[m.nome]?.[nivel];
+
+                return (
+                  <img
+                    key={nivel}
+                    className="medal-img"
+                    src={
+                      medalha
+                        ? `/medals/${medalha}.png`
+                        : "/medals/empty.png"
+                    }
+                    alt="Medalha"
+                  />
+                );
+              })}
+            </div>
+
           </div>
         ))}
       </div>
