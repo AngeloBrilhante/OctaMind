@@ -33,7 +33,7 @@ export default function MapaMateria() {
     const img = new Image();
     img.src = mapas[materia];
     img.onload = () => setLoaded(true);
-  }, [materia]);
+  }, [materia, mapas]); // 👈 corrigido
 
   return (
     <div className={`mapa-container ${loaded ? "fade-in" : ""}`}>
