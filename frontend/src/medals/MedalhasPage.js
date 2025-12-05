@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import "./medalhas.css";
 
-// ⬇️ MOVER PARA FORA DO COMPONENTE
 const materias = [
   { nome: "matematica", label: "Matemática" },
   { nome: "portugues", label: "Português" },
@@ -28,7 +27,7 @@ export default function MedalhasPage() {
     });
 
     setMedalhas(dados);
-  }, []); // ⬅️ agora não depende mais da array
+  }, []);
 
   return (
     <div className="medalhas-container">
@@ -39,21 +38,24 @@ export default function MedalhasPage() {
           <div key={m.nome} className="materia-card">
             <h3>{m.label}</h3>
 
-            <div className="medalhas-row">
-              {[1,2,3,4].map((nivel) => {
+            <div className="nivel-column">
+              {[1, 2, 3, 4].map((nivel) => {
                 const medalha = medalhas[m.nome]?.[nivel];
 
                 return (
-                  <img
-                    key={nivel}
-                    className="medal-img"
-                    src={
-                      medalha
-                        ? `/medals/${medalha}.png`
-                        : "/medals/empty.png"
-                    }
-                    alt="Medalha"
-                  />
+                  <div key={nivel} className="nivel-card">
+                    
+
+                    {medalha ? (
+                      <img
+                        className="medal-img"
+                        src={`/medalIcons/${medalha}.png`}
+                        alt={`Medalha ${medalha}`}
+                      />
+                    ) : (
+                      <div className="medal-placeholder">?</div>
+                    )}
+                  </div>
                 );
               })}
             </div>

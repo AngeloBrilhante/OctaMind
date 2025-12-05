@@ -1,77 +1,105 @@
 .medalhas-container {
   width: 100%;
   min-height: 100vh;
-  background: #74d79a;
-  padding: 40px 20px;
+  padding: 30px;
+  background: linear-gradient(90deg, #7b2ff7, #1dd65d);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.titulo {
-  font-size: 38px;
+/* GRID DAS MATÉRIAS — cada coluna é uma matéria */
+.medalhas-container .materias-grid {
+  width: 95%;
+  display: flex;
+  justify-content: space-around;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+/* COLUNA DE UMA MATÉRIA */
+.medalhas-container .materia-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  height: auto;        /* cresce conforme a quantidade de níveis */
+  overflow: visible;   /* impede qualquer corte */
+  
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* Título da matéria */
+.medalhas-container .materia-card h3 {
+  font-size: 22px;
   font-weight: bold;
-  color: #3a3a3a;
-  margin-bottom: 30px;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
 }
 
-.medalhas-grid {
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 25px;
+/* COLUNA DOS NÍVEIS */
+.medalhas-container .nivel-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
-.medal-card {
+/* CARD DE NÍVEL — estilo Duolingo */
+.medalhas-container .nivel-card {
+  width: 150px;
   background: white;
   border-radius: 20px;
-  padding: 20px;
+  padding: 15px 7px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.18);
   text-align: center;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-  transition: transform .15s ease;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  transition: transform .2s ease;
 }
 
-.medal-card:hover {
-  transform: scale(1.05);
+/* Animação ao passar o mouse */
+.medalhas-container .nivel-card:hover {
+  transform: translateY(-6px);
 }
 
-.materia {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: #555;
+/* Texto do nível */
+.medalhas-container .nivel-card p {
+  background: black;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
 }
 
-.medal-img {
-  width: 90px;
-  animation: pop 0.3s ease;
+/* Medalha */
+.medalhas-container .medal-img {
+  width: 70px;
+  height: 70px;
 }
 
-.medal-img.ouro {
-  filter: drop-shadow(0 0 10px gold);
-}
-
-.medal-img.prata {
-  filter: drop-shadow(0 0 10px silver);
-}
-
-.medal-img.bronze {
-  filter: drop-shadow(0 0 10px #cd7f32);
-}
-
-.medal-placeholder {
-  width: 90px;
-  height: 90px;
+/* Circulo da interrogação estilo Duolingo */
+.medalhas-container .medal-placeholder {
+  width: 70px;
+  height: 70px;
+  background: #e6e6e6;
   border-radius: 50%;
-  background: #ddd;
   font-size: 40px;
-  color: #888;
+  font-weight: bold;
+  color: #777;
+
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-@keyframes pop {
-  0% { transform: scale(0.5); opacity: 0.2; }
-  100% { transform: scale(1); opacity: 1; }
 }
