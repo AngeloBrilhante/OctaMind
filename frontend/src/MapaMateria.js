@@ -1,5 +1,5 @@
 // MapaMateria.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./MapaMateria.css";
 
@@ -9,13 +9,14 @@ export default function MapaMateria() {
 
   const [loaded, setLoaded] = useState(false);
 
-  const mapas = {
+  // ✅ memoriza o objeto para não recriar a cada render
+  const mapas = useMemo(() => ({
     matematica: "/mapas/mapa_matematica.png",
     portugues: "/mapas/mapa_portugues.png",
     historia: "/mapas/mapa_historia.png",
     quimica: "/mapas/mapa_quimica.png",
     biologia: "/mapas/mapa_biologia.png",
-  };
+  }), []);
 
   const fases = [
     { id: 1, x: "22%", y: "61%" },
@@ -28,12 +29,12 @@ export default function MapaMateria() {
     navigate(`/quiz/${materia}/${faseId}`);
   };
 
-  // 🔥 Pré-carrega a imagem do mapa
+  // 🔥 pré-carrega a imagem
   useEffect(() => {
     const img = new Image();
     img.src = mapas[materia];
     img.onload = () => setLoaded(true);
-  }, [materia, mapas]); // 👈 corrigido
+  }, [materia, mapas]); // <-- mapas adicionado agora
 
   return (
     <div className={`mapa-container ${loaded ? "fade-in" : ""}`}>
