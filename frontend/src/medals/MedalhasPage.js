@@ -1,7 +1,7 @@
 // MedalhasPage.js
 
 import React, { useEffect, useState } from "react";
-import "./MedalhasPage.css";
+import "./medalhas.css";
 
 // ⬇️ MOVER PARA FORA DO COMPONENTE
 const materias = [
